@@ -26,13 +26,22 @@ module.exports = function(server) {
 		let todo = new Todo(data);
 		todo.save(function(err) {
 			if (err) {
+				res.send(500,{
+					type: false,
+					data: err
+				});
+			
 				console.error(err);
 				return next(new errors.InternalError(err.message));
-				next();
 			}
 
-			res.send(201);
+			res.send(201,{
+					type: true,
+					message: "Success"
+				});
+
 			next();
+			
 		});
 	});
 
@@ -42,6 +51,10 @@ module.exports = function(server) {
 	server.get('/todos', (req, res, next) => {
 		Todo.apiQuery(req.params, function(err, docs) {
 			if (err) {
+				res.send(500,{
+					type: false,
+					data: err
+				});
 				console.error(err);
 				return next(
 					new errors.InvalidContentError(err.errors.name.message),
@@ -65,7 +78,7 @@ module.exports = function(server) {
 				);
 			}
 
-			res.send(doc);
+			res.send(doc, {message: "Success"});
 			next();
 		});
 	});
@@ -103,12 +116,16 @@ module.exports = function(server) {
 			Todo.update({ _id: data._id }, data, function(err) {
 				if (err) {
 					console.error(err);
+					res.send(500, {
+						type: false,
+						data: "Todo: " + req.params.id + " não encontrado"
+					});
 					return next(
 						new errors.InvalidContentError(err.errors.name.message),
 					);
 				}
 
-				res.send(200, data);
+				res.send(200, data, {message: "Success"});
 				next();
 			});
 		});
@@ -120,13 +137,20 @@ module.exports = function(server) {
 	server.del('/todos/:todo_id', (req, res, next) => {
 		Todo.remove({ _id: req.params.todo_id }, function(err) {
 			if (err) {
+				res.send(500,{
+					type: false,
+					data: err
+				});
 				console.error(err);
 				return next(
 					new errors.InvalidContentError(err.errors.name.message),
 				);
 			}
 
-			res.send(204);
+			res.send(200, {
+                type: true,
+                data: "Todo: " + req.params.id + " removido com sucesso"
+            });
 			next();
 		});
 	});

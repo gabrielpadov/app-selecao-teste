@@ -1,20 +1,29 @@
-<ion-tabs>
+<ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title>
+        Tab Two
+      </ion-title>
+    
+        <ion-icon size="large" slot="end" name="add-circle" tab="tab2"></ion-icon>
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1">
-      <ion-icon name="flash"></ion-icon>
-      <ion-label>Tab One</ion-label>
-    </ion-tab-button>
+    </ion-toolbar>
+  </ion-header>
+    
+  <ion-content>
+      
+      <ion-list>
+          <ion-item class="item ios in-list ion-focusable item-label hydrated"
+          *ngFor="let item of items" >
+        <ion-icon slot="end" class="ios hydrated" class="ios hydrated" name="eye" (click)="updateItem(item)"></ion-icon>
+        <ion-icon slot="end" class="ios hydrated" name="arrow-dropup-circle" (click)="updateItem(item)"></ion-icon>
+        <ion-icon slot="end" class="ios hydrated" class="ios hydrated" name="close-circle" (click)="alertConfirmDelete(item)"></ion-icon>
+            
+            <ion-label (click)="viewItem(item)">
+              <h2>{{item.title}}</h2>
+              <h3>{{item.description}}</h3>
+            </ion-label>
+          </ion-item>
+         
+      </ion-list>
 
-    <ion-tab-button tab="tab2">
-      <ion-icon name="apps"></ion-icon>
-      <ion-label>Tab Two</ion-label>
-    </ion-tab-button>
-
-    <ion-tab-button tab="tab3">
-      <ion-icon name="send"></ion-icon>
-      <ion-label>Tab Three</ion-label>
-    </ion-tab-button>
-  </ion-tab-bar>
-
-</ion-tabs>
+  </ion-content>
