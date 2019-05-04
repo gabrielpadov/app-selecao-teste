@@ -1,10 +1,46 @@
 <ion-header>
   <ion-toolbar color="warning">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
       <ion-title>
       Add Restaurant
     </ion-title>
-    <ion-icon name="arrow-round-back" routerLink="tabs" slot="icon-only"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+    <form #form="ngForm" (ngSubmit)="addRestaurant(form)">
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+              <div padding>
+                 <ion-item>
+                  <ion-input  name="name" type="text" placeholder="Name" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input  name="category" type="text" placeholder="Category" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input  name="deliveryEstimate" type="text" placeholder="DeliveryEstimate" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input  name="rating" type="number" step=".1" min="0" max="5" placeholder="Rating" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input  name="imagePath" type="text" placeholder="ImagePath" ngModel required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-textarea name="about" type="text" placeholder="About" ngModel required></ion-textarea>
+                </ion-item>
+              </div>
+              <div padding>
+                <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Add</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+
+</ion-content>

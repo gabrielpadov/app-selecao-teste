@@ -1,29 +1,30 @@
-import { Tab3Page } from './../tab3/tab3.page';
-import { Component } from '@angular/core';
+import { Tab3Page } from './tab3/tab3.page';
+import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
+import { RestApiService } from '../rest-api.service';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: 'tabs.page.html',
-  styleUrls: ['tabs.page.scss']
+  selector: 'app-Restaurants',
+  templateUrl: 'Restaurants.page.html',
+  styleUrls: ['Restaurants.page.scss']
 })
-export class TabsPage {
+export class RestaurantsPage implements OnInit {
 
-  public items = [
-    {title: 'hi1', description: 'test1'},
-    {title: 'hi2', description: 'test2'},
-    {title: 'hi3', description: 'test3'}
-  ];
+  restaurants: any;
 
-  constructor(public alertDelete: AlertController, public modalView: ModalController) {
+  constructor(public alertDelete: AlertController,
+              public modalView: ModalController,
+              public restApiService: RestApiService) {  }
 
+  ngOnInit() {
+    this.restaurants = this.restApiService.listRestaurants();
   }
 
   addItem(item) {
     console.log('addItem');
   }
 
-  updateItem(item) {
+  viewItem(item) {
     console.log('update');
   }
 
@@ -31,7 +32,7 @@ export class TabsPage {
     console.log('delete');
   }
 
-  async alertConfirmDelete(item) {
+  async alertConfirmDelete(id) {
     const alert = await this.alertDelete.create({
       header: 'Confirm!',
       message: 'Message <strong>text</strong>!!!',
@@ -46,7 +47,7 @@ export class TabsPage {
         }, {
           text: 'Okay',
           handler: () => {
-            this.deleteItem(item);
+            this.deleteItem(id);
           }
         }
       ]
@@ -55,10 +56,10 @@ export class TabsPage {
     await alert.present();
   }
 
-  async viewItem(item) {
+  async updateItem(restaurant) {
     const modal = await this.modalView.create({
       component: Tab3Page,
-      componentProps: { value: 123, item }
+      componentProps: { restaurant }
     });
     return await modal.present();
   }

@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Updates
+    </ion-title>
+    <ion-buttons slot="end" class="sc-ion-buttons-md-h sc-ion-buttons-md-s md hydrated">
+    <ion-button slot="end" (click)="closeModal()" 
+        class="ios md button button-clear ion-activatable ion-focusable hydrated activated">
+          Close
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <form #form="ngForm" (ngSubmit)="updateRestaurant(form)">
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+              <div padding>
+                 <ion-item>
+                  <ion-input  name="name" type="text" placeholder="Name" [(ngModel)]='restaurant.name' required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input  name="category" type="text" placeholder="Category" [(ngModel)]='restaurant.category' required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input  name="deliveryEstimate" type="text" placeholder="DeliveryEstimate" [(ngModel)]='restaurant.deliveryEstimate' required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input  name="rating" type="number" step=".1" min="0" max="5" placeholder="Rating" [(ngModel)]='restaurant.rating' required></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-input  name="imagePath" type="text" placeholder="ImagePath" [(ngModel)]='restaurant.imagePath' required></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-textarea name="about" type="text" placeholder="About" [(ngModel)]='restaurant.about' required></ion-textarea>
+                </ion-item>
+              </div>
+              <div padding>
+                <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Add</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+
+</ion-content>

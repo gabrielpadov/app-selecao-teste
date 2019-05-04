@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="success">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+    <ion-title>View</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="sc-ion-card-ios-h sc-ion-card-ios-s ios hydrated">
+      <img src="../../assets/images/restaurant.jpg" alt="teste">
+      <ion-card-header class="ios hydrated">
+        <ion-card-subtitle class="ios hydrated" role="heading" aria-level="3">Destination</ion-card-subtitle>
+        <ion-card-title class="ios hydrated" role="heading" aria-level="2">Madison, WI</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="ios card-content-ios hydrated">
+        Founded in 1829 on an isthmus between Lake Monona and Lake Mendota, Madison was named the capital of the Wisconsin Territory in 1836.
+      </ion-card-content>
+      <div padding>
+     
+        <ion-button (click)="viewReview()" fill="outline" slot="end">Reviews</ion-button>
+     
+      </div>
+    </ion-card>
+
+      <div padding>
+          <ion-list class="ios hydrated md list-md hydrated">
+              <ion-list-header class="md hydrated">
+                Menu
+              </ion-list-header>
+      
+              <ion-item class="item ios in-list ion-focusable item-label hydrated
+              item md in-list ion-focusable item-label hydrated">
+                <ion-avatar slot="start" class="md hydrated">
+                  <img src="../../assets/images/menu.png">
+                </ion-avatar>
+                <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+                  <h2>Finn</h2>
+                  <h3>I'm a big deal</h3>
+                  <p>Listen, I've had a pretty messed up day...</p>
+                </ion-label>
+              </ion-item>
+      
+            </ion-list>
+      </div>
+
+
+</ion-content>
