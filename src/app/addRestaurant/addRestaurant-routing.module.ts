@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Tab2Page } from './tab2.page';
+import { AddRestaurantPage } from './addRestaurant.page';
 
 const routes: Routes = [
-    { path: '', component: Tab2Page }
+    { path: '', component: AddRestaurantPage }
    ];
 
 @NgModule({
@@ -12,4 +12,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class Tab2PageRoutingModule {}
+export class AddRestaurantPageRoutingModule {}

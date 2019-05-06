@@ -1,9 +1,10 @@
-import { Tab3Page } from './tab3/tab3.page';
+import { UpdateRestaurantPage } from './updateRestaurant/updateRestaurant.page';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; import { RestaurantsPageRoutingModule } from './Restaurants-routing.module';
-import { RestaurantsPage } from './Restaurants.page';
+import { FormsModule } from '@angular/forms';
+import { RestaurantsPageRoutingModule } from './restaurants-routing.module';
+import { RestaurantsPage } from './restaurants.page';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { RestaurantsPage } from './Restaurants.page';
     RestaurantsPageRoutingModule,
 
   ],
-  declarations: [RestaurantsPage, Tab3Page],
-  entryComponents: [Tab3Page]
+  declarations: [RestaurantsPage, UpdateRestaurantPage],
+  entryComponents: [UpdateRestaurantPage]
 })
 export class RestaurantsPageModule {}

@@ -1,16 +1,17 @@
-import { Tab3Page } from './tab3/tab3.page';
+import { UpdateRestaurantPage } from './updateRestaurant/updateRestaurant.page';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
+import { Restaurant } from '../models/restaurant';
 
 @Component({
-  selector: 'app-Restaurants',
-  templateUrl: 'Restaurants.page.html',
-  styleUrls: ['Restaurants.page.scss']
+  selector: 'app-restaurants',
+  templateUrl: 'restaurants.page.html',
+  styleUrls: ['restaurants.page.scss']
 })
 export class RestaurantsPage implements OnInit {
 
-  restaurants: any;
+  restaurants: Restaurant[];
 
   constructor(public alertDelete: AlertController,
               public modalView: ModalController,
@@ -20,7 +21,7 @@ export class RestaurantsPage implements OnInit {
     this.restaurants = this.restApiService.listRestaurants();
   }
 
-  addItem(item) {
+  addItem() {
     console.log('addItem');
   }
 
@@ -28,7 +29,7 @@ export class RestaurantsPage implements OnInit {
     console.log('update');
   }
 
-  deleteItem(item) {
+  deleteItem(id) {
     console.log('delete');
   }
 
@@ -56,9 +57,9 @@ export class RestaurantsPage implements OnInit {
     await alert.present();
   }
 
-  async updateItem(restaurant) {
+  async updateItem(restaurant: Restaurant) {
     const modal = await this.modalView.create({
-      component: Tab3Page,
+      component: UpdateRestaurantPage,
       componentProps: { restaurant }
     });
     return await modal.present();

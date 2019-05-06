@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="success">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+    <ion-title>View</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card class="sc-ion-card-ios-h sc-ion-card-ios-s ios hydrated">
+        <ion-icon slot="end" class="ios md hydrated" class="ios hydrated"
+        name="star" color="warning"></ion-icon> <ion-text color="dark">{{ restaurant.rating }}</ion-text>
+      <img src="../../assets/images/restaurant.jpg" alt="restaurant.imagePath">
+      <ion-card-header class="ios hydrated">
+        <ion-card-subtitle class="ios hydrated" role="heading" aria-level="3">{{ restaurant.category }}</ion-card-subtitle>
+        <ion-card-title class="ios hydrated" role="heading" aria-level="2">{{ restaurant.name }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="ios card-content-ios hydrated">
+        <h3>{{ restaurant.deliveryEstimate }}</h3>
+         <div padding>
+          <p>{{ restaurant.about }}</p>
+        </div>
+        <h2>{{ restaurant.hours }}</h2>
+      </ion-card-content>
+      <div padding>
+        <ion-button (click)="viewReview(restaurant.id)" fill="outline" slot="end">Reviews</ion-button>
+      </div>
+    </ion-card>
+
+      <div padding>
+          <ion-list class="ios hydrated md list-md hydrated"
+            *ngIf="menus">
+              <ion-list-header class="md hydrated" color="danger">
+                Menu
+              </ion-list-header>
+      
+              <ion-item *ngFor="let menu of menus" class="item ios in-list ion-focusable item-label hydrated
+              item md in-list ion-focusable item-label hydrated" >
+                <ion-avatar slot="start" class="md hydrated">
+                  <img src="../../assets/images/menu.png" alt="menu.imagePath">
+                </ion-avatar>
+                <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
+                  <h2>{{ menu.name }}</h2>
+                  <h3>{{ menu.price }}</h3>
+                  <p>{{ menu.description }}</p>
+                </ion-label>
+              </ion-item>
+      
+            </ion-list>
+      </div>
+
+
+</ion-content>

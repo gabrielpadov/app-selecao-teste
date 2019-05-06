@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="tertiary">
+    <ion-title>reviews</ion-title>
+    <ion-buttons slot="end" class="sc-ion-buttons-md-h sc-ion-buttons-md-s md hydrated">
+        <ion-button slot="end" (click)="closeModal()" 
+            class="ios md button button-clear ion-activatable ion-focusable hydrated activated">
+              Close
+          </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="reviews">
+    <ion-card  color="secondary" *ngFor="let review of reviews">
+      <ion-card-content>
+          <ion-icon slot="end" class="ios md hydrated" class="ios hydrated"
+          name="star" color="warning"></ion-icon>
+          <ion-text color="dark">{{ review.rating }}</ion-text>
+          <ion-text color="dark"><h3>{{ review.date }}</h3></ion-text>
+        <h2>{{ review.name }}</h2>
+        <p>{{ review.comments }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>

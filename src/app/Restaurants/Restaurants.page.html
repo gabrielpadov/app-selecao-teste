@@ -5,7 +5,7 @@
       </ion-title>
    
       <ion-buttons slot="primary">
-          <ion-button slot="icon-only" color="warning" size="default" routerLink="/tab2" 
+          <ion-button slot="icon-only" color="warning" size="large" routerLink="/addRestaurant" 
           routerDirection="forward">
             <ion-icon slot="end" name="add-circle"></ion-icon>
           </ion-button>
@@ -20,14 +20,14 @@
             *ngFor="let restaurant of restaurants" >
             
         <ion-icon slot="end" class="ios md hydrated" class="ios hydrated" color="success"
-          name="eye" routerLink="/view" routerDirection="forward"></ion-icon>
+          name="eye"  [routerLink]="['/view/', restaurant.id]" routerDirection="forward"></ion-icon>
         <ion-icon slot="end" class="ios hydrated" color="primary"
           name="arrow-dropup-circle" (click)="updateItem(restaurant)"></ion-icon>
         <ion-icon slot="end" class="ios hydrated" color="danger"
           class="ios hydrated" name="close-circle" (click)="alertConfirmDelete(restaurant.id)">
         </ion-icon>
             
-            <ion-label routerLink="/view" routerDirection="forward">
+            <ion-label [routerLink]="['/view/', restaurant.id]" routerDirection="forward">
               <h2 color="dark">{{ restaurant.name }}</h2>
               <h3>{{ restaurant.category }}</h3>
             </ion-label>

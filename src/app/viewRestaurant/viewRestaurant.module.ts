@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ViewPage } from './view.page';
-import { ViewPageRoutingModule } from './view-routing.module';
+import { ViewRestaurantPage } from './viewRestaurant.page';
+import { ViewRestaurantPageRoutingModule } from './viewRestaurant-routing.module';
 import { ReviewsPage } from './reviews/reviews.page';
 
 @NgModule({
@@ -13,9 +13,9 @@ import { ReviewsPage } from './reviews/reviews.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewPageRoutingModule
+    ViewRestaurantPageRoutingModule
   ],
-  declarations: [ViewPage, ReviewsPage],
+  declarations: [ViewRestaurantPage, ReviewsPage],
   entryComponents: [ReviewsPage]
 })
-export class ViewPageModule {}
+export class ViewRestaurantPageModule {}
