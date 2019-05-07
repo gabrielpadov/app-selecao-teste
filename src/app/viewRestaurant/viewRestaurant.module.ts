@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ViewRestaurantPage } from './viewRestaurant.page';
 import { ViewRestaurantPageRoutingModule } from './viewRestaurant-routing.module';
-import { ReviewsPage } from './reviews/reviews.page';
+
 
 @NgModule({
   imports: [
