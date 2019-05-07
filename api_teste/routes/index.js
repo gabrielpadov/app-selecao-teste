@@ -399,7 +399,7 @@ module.exports = function(server) {
 	 * GET review -> restaurantId
 	 */
 	server.get('/reviewsRestaurantId/:restaurantId', (req, res, next) => {
-		Menu.find({ restaurantId: req.params.restaurantId }, function(err, doc) {
+		Review.find({ restaurantId: req.params.restaurantId }, function(err, doc) {
 			if (err) {
 				console.error(err);
 				return next(

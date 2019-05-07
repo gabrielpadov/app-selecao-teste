@@ -28,8 +28,8 @@
         </ion-icon>
             
             <ion-label [routerLink]="['/view/', restaurant._id]" routerDirection="forward">
-              <h2 color="dark">{{ restaurant.name }}</h2>
-              <h3>{{ restaurant.category }}</h3>
+              <ion-text color="dark"><h2>{{ restaurant.name }}</h2></ion-text>
+              <ion-text><h3>{{ restaurant.category }}</h3></ion-text>
             </ion-label>
           </ion-item>
          
