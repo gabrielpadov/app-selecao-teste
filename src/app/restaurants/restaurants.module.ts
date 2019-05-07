@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RestaurantsPageRoutingModule } from './restaurants-routing.module';
 import { RestaurantsPage } from './restaurants.page';
+import { UpdateRestaurantPageModule } from './updateRestaurant/updateRestaurant.module';
 
 
 @NgModule({
@@ -13,9 +14,9 @@ import { RestaurantsPage } from './restaurants.page';
     CommonModule,
     FormsModule,
     RestaurantsPageRoutingModule,
-
+    UpdateRestaurantPageModule
   ],
-  declarations: [RestaurantsPage, UpdateRestaurantPage],
-  entryComponents: [UpdateRestaurantPage]
+  declarations: [RestaurantsPage],
+  entryComponents: []
 })
 export class RestaurantsPageModule {}

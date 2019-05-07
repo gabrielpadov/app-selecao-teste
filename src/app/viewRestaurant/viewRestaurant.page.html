@@ -11,18 +11,18 @@
     <ion-card class="sc-ion-card-ios-h sc-ion-card-ios-s ios hydrated">
         <ion-icon slot="end" class="ios md hydrated" class="ios hydrated"
         name="star" color="warning"></ion-icon> 
-        <ion-text color="dark">{{ restaurant.rating }}</ion-text>
-      <img src="../../assets/images/restaurant.jpg" alt="restaurant.imagePath">
+        <ion-text color="dark">{{ restaurant?.rating }}</ion-text>
+      <img src="../../assets/images/restaurant.jpg" alt="restaurant?.imagePath">
       <ion-card-header class="ios hydrated">
-        <ion-card-subtitle class="ios hydrated" role="heading" aria-level="3">{{ restaurant.category }}</ion-card-subtitle>
-        <ion-card-title class="ios hydrated" role="heading" aria-level="2">{{ restaurant.name }}</ion-card-title>
+        <ion-card-subtitle class="ios hydrated" role="heading" aria-level="3">{{ restaurant?.category }}</ion-card-subtitle>
+        <ion-card-title class="ios hydrated" role="heading" aria-level="2">{{ restaurant?.name }}</ion-card-title>
       </ion-card-header>
       <ion-card-content class="ios card-content-ios hydrated">
-        <h3>{{ restaurant.deliveryEstimate }}</h3>
+        <h3>{{ restaurant?.deliveryEstimate }}</h3>
        
-          <p>{{ restaurant.about }}</p>
+          <p>{{ restaurant?.about }}</p>
         
-        <h2>{{ restaurant.hours }}</h2> 
+        <h2>{{ restaurant?.hours }}</h2> 
         </ion-card-content>
       <!--div padding>
         <ion-button (click)="viewReview(restaurant)" fill="outline" slot="end">Reviews</ion-button>
@@ -38,26 +38,28 @@
               <ion-item *ngFor="let menu of menus" class="item ios in-list ion-focusable item-label hydrated
               item md in-list ion-focusable item-label hydrated" >
                 <ion-avatar slot="start" class="md hydrated">
-                  <img src="../../assets/images/menu.png" alt="menu.imagePath">
+                  <img src="../../assets/images/menu.png" alt="menu?.imagePath">
                 </ion-avatar>
                 <ion-label class="sc-ion-label-md-h sc-ion-label-md-s md hydrated">
-                  <h2>{{ menu.name }}</h2>
-                  <h3>PRICE: {{ menu.price }}</h3>
+                  <h2>{{ menu?.name }}</h2>
+                  <h3>PRICE: {{ menu?.price }}</h3>
                  <ion-text color="dark">
-				 <h5>{{ menu.description }}</h5>
+				 <h5>{{ menu?.description }}</h5>
 				 </ion-text>
                 </ion-label>
               </ion-item>
       
             </ion-list>
+
+      <ion-text color="dark"><h2>{{ review?.date }}</h2></ion-text>
 			<ion-card  color="secondary" *ngFor="let review of reviews">
       <ion-card-content>
           <ion-icon slot="end" class="ios md hydrated" class="ios hydrated"
           name="star" color="warning"></ion-icon>
-          <ion-text color="dark">{{ review.rating }}</ion-text>
-          <ion-text color="dark"><h3>{{ review.date }}</h3></ion-text>
-        <h2>{{ review.name }}</h2>
-        <p>{{ review.comments }}</p>
+          <ion-text color="dark">{{ review?.rating }}</ion-text>
+          <ion-text color="dark"><h3>{{ review?.date }}</h3></ion-text>
+        <h2>{{ review?.name }}</h2>
+        <p>{{ review?.comments }}</p>
       </ion-card-content>
     </ion-card>
       </div>

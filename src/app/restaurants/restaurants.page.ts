@@ -1,8 +1,8 @@
-import { UpdateRestaurantPage } from './updateRestaurant/updateRestaurant.page';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
 import { Restaurant } from '../models/restaurant';
+import { UpdateRestaurantPage } from './updateRestaurant/updateRestaurant.page';
 
 @Component({
   selector: 'app-restaurants',

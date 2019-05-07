@@ -19,26 +19,25 @@ export class ViewRestaurantPage implements OnInit {
   restaurant: any;
   menus: any;
   reviews: any;
-  
 
    constructor(private activatedRoute: ActivatedRoute,
                public modalView: ModalController,
                public restApiService: RestApiService) {   }
 
-	ngOnInit() { 
-		 this.id = this.activatedRoute.snapshot.paramMap.get('id');
-		 this.restApiService.getRestaurant(this.id).subscribe((data: {}) => {
-			this.restaurant = data;
-			this.restApiService.getMenuRestaurant(this.restaurant.id).subscribe((data: {}) => {
-				this.menus = data;
-			});
-			this.restApiService.getReviewRestaurant(this.restaurant.id).subscribe((data: {}) => {
-				this.reviews = data;
-			});
-		 });
-	}
+ ngOnInit() {
+   this.id = this.activatedRoute.snapshot.paramMap.get('id');
+   this.restApiService.getRestaurant(this.id).subscribe((data: {}) => {
+     this.restaurant = data;
+     this.restApiService.getMenuRestaurant(this.restaurant.id).subscribe((dataa: {}) => {
+       this.menus = dataa;
+     });
+     this.restApiService.getReviewRestaurant(this.restaurant.id).subscribe((dataaa: {}) => {
+       this.reviews = dataaa;
+      });
+    });
+  }
  /*
-  
+
    async viewReview(restaurant: Restaurant) {
     // const aux: Review[ ] = this.reviews;
     const modal = await this.modalView.create({
