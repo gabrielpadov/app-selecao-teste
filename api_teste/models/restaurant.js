@@ -41,5 +41,5 @@ const RestaurantSchema = new mongoose.Schema(
 
 RestaurantSchema.plugin(mongooseStringQuery);
 
-const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
+const Restaurant = mongoose.model('restaurants', RestaurantSchema);
 module.exports = Restaurant; 

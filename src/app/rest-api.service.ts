@@ -10,51 +10,19 @@ import { Order } from './models/order';
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
-const apiUrl = '/api/v1/products';
+const apiUrl = 'http://localhost:3000/';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestApiService {
 
-  restaurants: any = [
-    {
-      id: 'bread-bakery',
-      name: 'Bread & Bakery',
-      category: 'Bakery',
-      deliveryEstimate: '25m',
-      rating: 4.9,
-      imagePath: 'assets/img/restaurants/breadbakery.png',
-      about: 'A Bread & Brakery tem 40 anos de mercado. Fazemos os melhores doces e pães. Compre e confira.',
-      hours: 'Funciona de segunda à sexta, de 8h às 23h'
-    },
-    {
-      id: 'burger-house',
-      name: 'Burger House',
-      category: 'Hamburgers',
-      deliveryEstimate: '100m',
-      rating: 3.5,
-      imagePath: 'assets/img/restaurants/burgerhouse.png',
-      about: '40 anos se especializando em trash food.',
-      hours: 'Funciona todos os dias, de 10h às 22h'
-    },
-    {
-      id: 'coffee-corner',
-      name: 'Coffee Corner',
-      category: 'Coffee Shop',
-      deliveryEstimate: '30-40m',
-      rating: 4.8,
-      imagePath: 'assets/img/restaurants/coffeecorner.png',
-      about: 'A Coffe Corner foi eleita a melhor cafeteria da cidade.',
-      hours: 'Funciona de segunda à sábado, de 6h às 22h'
-    }
-  ];
+  private extractData(res: Response) {
+    const body = res;
+    return body || { };
+  }
 
   constructor(private http: HttpClient) { }
-
-  listRestaurants() {
-    return this.restaurants;
-  }
 
   /**
    * Tratamento de erros
@@ -67,145 +35,157 @@ export class RestApiService {
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
+      // TODO: better job of transforming error for user consumption
+      console.log(`${operation} failed: ${error.message}`);
+
       // Let the app keep running by returning an empty result.
       // tslint:disable-next-line: deprecation
-      return of (result as T);
+      return of(result as T);
     };
   }
 
   //////////////////// CRUD RESTAURANT /////////////
-  getRestaurant(id): Observable<Restaurant> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.get<Restaurant>(url).pipe(
-      tap(_ => console.log(`fetched Restaurant id=${id}`)),
-      catchError(this.handleError<Restaurant>(`getRestaurant id=${id}`))
-    );
+  getRestaurants(): Observable<any> {
+    return this.http.get(apiUrl + 'restaurants').pipe(
+      map(this.extractData));
+  }
+
+  getRestaurant(id): Observable<any> {
+    return this.http.get(apiUrl + 'restaurants/' + id).pipe(
+      map(this.extractData));
   }
 
   addRestaurant(restaurant): Observable<Restaurant> {
-    return this.http.post<Restaurant>(apiUrl, restaurant, httpOptions).pipe(
+    return this.http.post<Restaurant>(apiUrl + 'restaurants', restaurant, httpOptions).pipe(
       // tslint:disable-next-line:no-shadowed-variable
-      tap((restaurant: Restaurant) => console.log(`added restaurant w/ id=${restaurant.id}`)),
+      tap((restaurant) => console.log(`added restaurant w/ id=${restaurant.id}`)),
       catchError(this.handleError<Restaurant>('addRestaurant'))
     );
   }
 
   updateRestaurant(id, restaurant): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.put(url, restaurant, httpOptions).pipe(
+    return this.http.put(apiUrl + 'restaurants/' + id, restaurant, httpOptions).pipe(
       tap(_ => console.log(`updated restaurant id=${id}`)),
       catchError(this.handleError<any>('updateRestaurant'))
     );
   }
 
-  deleteRestaurant(id): Observable<Restaurant> {
-    const url = `${apiUrl}/${id}`;
-
-    return this.http.delete<Restaurant>(url, httpOptions).pipe(
+  deleteRestaurant(id): Observable<any> {
+    return this.http.delete<any>(apiUrl + 'restaurants/' + id, httpOptions).pipe(
       tap(_ => console.log(`deleted restaurant id=${id}`)),
-      catchError(this.handleError<Restaurant>('deleteRestaurant'))
+      catchError(this.handleError<any>('deleteRestaurant'))
     );
   }
 
   //////////////////// CRUD MENU /////////////
-  getMenu(id): Observable<Menu> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.get<Menu>(url).pipe(
-      tap(_ => console.log(`fetched menu id=${id}`)),
-      catchError(this.handleError<Menu>(`getMenu id=${id}`))
-    );
-  }
+getMenus(): Observable<any> {
+  return this.http.get(apiUrl + 'menus').pipe(
+    map(this.extractData));
+}
 
-  addMenu(menu): Observable<Menu> {
-    return this.http.post<Menu>(apiUrl, menu, httpOptions).pipe(
-      // tslint:disable-next-line:no-shadowed-variable
-      tap((menu: Menu) => console.log(`added menu w/ id=${menu.id}`)),
-      catchError(this.handleError<Menu>('addMenu'))
-    );
-  }
+getMenu(id): Observable<any> {
+  return this.http.get(apiUrl + 'menus/' + id).pipe(
+    map(this.extractData));
+}
 
-  updateMenu(id, menu): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.put(url, menu, httpOptions).pipe(
-      tap(_ => console.log(`updated menu id=${id}`)),
-      catchError(this.handleError<any>('updateMenu'))
-    );
-  }
+getMenuRestaurant(restaurantId): Observable<any> {
+  return this.http.get(apiUrl + 'menusRestaurantId/' + restaurantId).pipe(
+    map(this.extractData));
+}
 
-  deleteMenu(id): Observable<Menu> {
-    const url = `${apiUrl}/${id}`;
+addMenu(menu): Observable<any> {
+  console.log(menu);
+  return this.http.post<any>(apiUrl + 'menus', JSON.stringify(menu), httpOptions).pipe(
+    // tslint:disable-next-line:no-shadowed-variable
+    tap((menu) => console.log(`added menu w/ id=${menu.id}`)),
+    catchError(this.handleError<any>('addMenu'))
+  );
+}
 
-    return this.http.delete<Menu>(url, httpOptions).pipe(
-      tap(_ => console.log(`deleted menu id=${id}`)),
-      catchError(this.handleError<Menu>('deleteMenu'))
-    );
-  }
+updateMenu(id, menu): Observable<any> {
+  return this.http.put(apiUrl + 'menus/' + id, JSON.stringify(menu), httpOptions).pipe(
+    tap(_ => console.log(`updated menu id=${id}`)),
+    catchError(this.handleError<any>('updateMenu'))
+  );
+}
+
+deleteMenu(id): Observable<any> {
+  return this.http.delete<any>(apiUrl + 'menus/' + id, httpOptions).pipe(
+    tap(_ => console.log(`deleted menu id=${id}`)),
+    catchError(this.handleError<any>('deleteMenu'))
+  );
+}
 
   //////////////////// CRUD REVIEW /////////////
-  getReview(id): Observable<Review> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.get<Review>(url).pipe(
-      tap(_ => console.log(`fetched review id=${id}`)),
-      catchError(this.handleError<Review>(`getReview id=${id}`))
-    );
+  getReviews(): Observable<any> {
+    return this.http.get(apiUrl + 'reviews').pipe(
+      map(this.extractData));
   }
 
-  addReview(review): Observable<Review> {
-    return this.http.post<Review>(apiUrl, review, httpOptions).pipe(
+  getReview(id): Observable<any> {
+    return this.http.get(apiUrl + 'reviews/' + id).pipe(
+      map(this.extractData));
+  }
+
+
+  getReviewRestaurant(restaurantId): Observable<any> {
+    return this.http.get(apiUrl + 'reviewsRestaurantId/' + restaurantId).pipe(
+      map(this.extractData));
+  }
+
+  addReview(review): Observable<any> {
+    console.log(review);
+    return this.http.post<any>(apiUrl + 'reviews', JSON.stringify(review), httpOptions).pipe(
       // tslint:disable-next-line:no-shadowed-variable
-      tap((review: Review) => console.log(`added review=${review}`)),
-      catchError(this.handleError<Review>('addReview'))
+      tap((review) => console.log(`added review w/ id=${review.id}`)),
+      catchError(this.handleError<any>('addReview'))
     );
   }
 
   updateReview(id, review): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.put(url, review, httpOptions).pipe(
+    return this.http.put(apiUrl + 'reviews/' + id, JSON.stringify(review), httpOptions).pipe(
       tap(_ => console.log(`updated review id=${id}`)),
       catchError(this.handleError<any>('updateReview'))
     );
   }
 
-  deleteReview(id): Observable<Review> {
-    const url = `${apiUrl}/${id}`;
-
-    return this.http.delete<Review>(url, httpOptions).pipe(
+  deleteReview(id): Observable<any> {
+    return this.http.delete<any>(apiUrl + 'reviews/' + id, httpOptions).pipe(
       tap(_ => console.log(`deleted review id=${id}`)),
-      catchError(this.handleError<Review>('deleteReview'))
+      catchError(this.handleError<any>('deleteReview'))
     );
   }
   //////////////////// CRUD ORDER /////////////
-  getOrder(id): Observable<Order> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.get<Order>(url).pipe(
-      tap(_ => console.log(`fetched order id=${id}`)),
-      catchError(this.handleError<Order>(`getOrder id=${id}`))
-    );
+  getOrders(): Observable<any> {
+    return this.http.get(apiUrl + 'orders').pipe(
+      map(this.extractData));
   }
 
-  addOrder(order): Observable<Order> {
-    return this.http.post<Order>(apiUrl, order, httpOptions).pipe(
+  getOrder(id): Observable<any> {
+    return this.http.get(apiUrl + 'orders/' + id).pipe(
+      map(this.extractData));
+  }
+
+  addOrder(order): Observable<any> {
+    console.log(order);
+    return this.http.post<any>(apiUrl + 'orders', JSON.stringify(order), httpOptions).pipe(
       // tslint:disable-next-line:no-shadowed-variable
-      tap((order: Order) => console.log(`added order=${order}`)),
-      catchError(this.handleError<Order>('addOrder'))
+      tap((order) => console.log(`added order w/ id=${order.id}`)),
+      catchError(this.handleError<any>('addOrder'))
     );
   }
 
   updateOrder(id, order): Observable<any> {
-    const url = `${apiUrl}/${id}`;
-    return this.http.put(url, order, httpOptions).pipe(
+    return this.http.put(apiUrl + 'orders/' + id, JSON.stringify(order), httpOptions).pipe(
       tap(_ => console.log(`updated order id=${id}`)),
       catchError(this.handleError<any>('updateOrder'))
     );
   }
 
-  deleteOrder(id): Observable<Order> {
-    const url = `${apiUrl}/${id}`;
-
-    return this.http.delete<Order>(url, httpOptions).pipe(
+  deleteOrder(id): Observable<any> {
+    return this.http.delete<any>(apiUrl + 'orders/' + id, httpOptions).pipe(
       tap(_ => console.log(`deleted order id=${id}`)),
-      catchError(this.handleError<Order>('deleteOrder'))
+      catchError(this.handleError<any>('deleteOrder'))
     );
   }
-
 }

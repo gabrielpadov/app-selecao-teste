@@ -1,5 +1,8 @@
+import { Restaurant } from './../models/restaurant';
+import { RestApiService } from './../rest-api.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-addRestaurant',
@@ -8,21 +11,35 @@ import { ToastController } from '@ionic/angular';
 })
 export class AddRestaurantPage implements OnInit {
 
-  id: string;
+  restaurant: Restaurant;
 
-  constructor(public toastController: ToastController) { }
+  constructor(public toastController: ToastController,
+              public restApiService: RestApiService,
+              private router: Router) { }
 
   ngOnInit() { }
 
   addRestaurant(form) {
 
-    console.log(form);
-     // this.authService.login(form.value).subscribe((res)=>{
-      // this.router.navigateByUrl('/restaurant');
-    this.id = form.value.name.toString();
-    console.log(this.id);
-    this.presentToast();
+    this.restaurant = { id: form.value.name,
+      name: form.value.name,
+      rating: form.value.rating,
+      category: form.value.category,
+      deliveryEstimate: form.value.deliveryEstimate,
+      hours: form.value.hours,
+      about: form.value.about,
+      imagePath: form.value.imagePath
+    };
 
+    this.restApiService.addRestaurant(this.restaurant).subscribe((result) => {
+      this.presentToast();
+      this.router.navigate(['/']).then(nav => {
+        window.location.reload();
+      });
+      }, (err) => {
+      console.log(err);
+     });
+    this.presentToast();
   }
 
   async presentToast() {

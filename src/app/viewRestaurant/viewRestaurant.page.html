@@ -10,7 +10,8 @@
 <ion-content>
     <ion-card class="sc-ion-card-ios-h sc-ion-card-ios-s ios hydrated">
         <ion-icon slot="end" class="ios md hydrated" class="ios hydrated"
-        name="star" color="warning"></ion-icon> <ion-text color="dark">{{ restaurant.rating }}</ion-text>
+        name="star" color="warning"></ion-icon> 
+        <ion-text color="dark">{{ restaurant.rating }}</ion-text>
       <img src="../../assets/images/restaurant.jpg" alt="restaurant.imagePath">
       <ion-card-header class="ios hydrated">
         <ion-card-subtitle class="ios hydrated" role="heading" aria-level="3">{{ restaurant.category }}</ion-card-subtitle>
@@ -21,16 +22,15 @@
          <div padding>
           <p>{{ restaurant.about }}</p>
         </div>
-        <h2>{{ restaurant.hours }}</h2>
-      </ion-card-content>
+        <h2>{{ restaurant.hours }}</h2> 
+        </ion-card-content>
       <div padding>
-        <ion-button (click)="viewReview(restaurant.id)" fill="outline" slot="end">Reviews</ion-button>
+        <ion-button (click)="viewReview()" fill="outline" slot="end">Reviews</ion-button>
       </div>
     </ion-card>
 
       <div padding>
-          <ion-list class="ios hydrated md list-md hydrated"
-            *ngIf="menus">
+          <ion-list class="ios hydrated md list-md hydrated">
               <ion-list-header class="md hydrated" color="danger">
                 Menu
               </ion-list-header>

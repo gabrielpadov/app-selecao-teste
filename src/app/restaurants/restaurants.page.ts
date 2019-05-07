@@ -11,26 +11,33 @@ import { Restaurant } from '../models/restaurant';
 })
 export class RestaurantsPage implements OnInit {
 
-  restaurants: Restaurant[];
+  restaurants: any;
 
   constructor(public alertDelete: AlertController,
               public modalView: ModalController,
               public restApiService: RestApiService) {  }
 
   ngOnInit() {
-    this.restaurants = this.restApiService.listRestaurants();
+    this.restaurants = this.getRestaurants();
+    // console.log(this.restaurants);
   }
 
-  addItem() {
-    console.log('addItem');
+  getRestaurants() {
+    this.restApiService.getRestaurants().subscribe((data: {}) => {
+      // console.log(data);
+      this.restaurants = data;
+    });
   }
 
-  viewItem(item) {
-    console.log('update');
-  }
-
-  deleteItem(id) {
-    console.log('delete');
+  deleteRestaurant(id) {
+    // console.log('delete');
+    this.restApiService.deleteRestaurant(id)
+        .subscribe(res => {
+            this.getRestaurants();
+          }, (err) => {
+            console.log(err);
+          }
+        );
   }
 
   async alertConfirmDelete(id) {
@@ -43,12 +50,12 @@ export class RestaurantsPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Okay',
           handler: () => {
-            this.deleteItem(id);
+            this.deleteRestaurant(id);
           }
         }
       ]
@@ -57,7 +64,7 @@ export class RestaurantsPage implements OnInit {
     await alert.present();
   }
 
-  async updateItem(restaurant: Restaurant) {
+  async updateRestaurant(restaurant: Restaurant) {
     const modal = await this.modalView.create({
       component: UpdateRestaurantPage,
       componentProps: { restaurant }

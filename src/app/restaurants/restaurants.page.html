@@ -20,14 +20,14 @@
             *ngFor="let restaurant of restaurants" >
             
         <ion-icon slot="end" class="ios md hydrated" class="ios hydrated" color="success"
-          name="eye"  [routerLink]="['/view/', restaurant.id]" routerDirection="forward"></ion-icon>
+          name="eye"  [routerLink]="['/view/', restaurant._id]" routerDirection="forward"></ion-icon>
         <ion-icon slot="end" class="ios hydrated" color="primary"
-          name="arrow-dropup-circle" (click)="updateItem(restaurant)"></ion-icon>
+          name="arrow-dropup-circle" (click)="updateRestaurant(restaurant)"></ion-icon>
         <ion-icon slot="end" class="ios hydrated" color="danger"
-          class="ios hydrated" name="close-circle" (click)="alertConfirmDelete(restaurant.id)">
+          class="ios hydrated" name="close-circle" (click)="alertConfirmDelete(restaurant._id)">
         </ion-icon>
             
-            <ion-label [routerLink]="['/view/', restaurant.id]" routerDirection="forward">
+            <ion-label [routerLink]="['/view/', restaurant._id]" routerDirection="forward">
               <h2 color="dark">{{ restaurant.name }}</h2>
               <h3>{{ restaurant.category }}</h3>
             </ion-label>

@@ -5,6 +5,12 @@ const config = require('./config');
 const restify = require('restify');
 const mongoose = require('mongoose');
 const restifyPlugins = require('restify-plugins');
+var corsMiddleware = require('restify-cors-middleware');
+
+var cors = corsMiddleware({
+  preflightMaxAge: 5,
+  origins: ['*']
+});
 
 /**
   * Initialize Server
@@ -21,6 +27,9 @@ server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));
 server.use(restifyPlugins.acceptParser(server.acceptable));
 server.use(restifyPlugins.queryParser({ mapParams: true }));
 server.use(restifyPlugins.fullResponse());
+
+server.pre(cors.preflight);
+server.use(cors.actual);
 
 /**
   * Start Server, Connect to DB & Require Routes

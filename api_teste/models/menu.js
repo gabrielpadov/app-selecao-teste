@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const mongooseStringQuery = require('mongoose-string-query');
 
 const MenuSchema = new mongoose.Schema(
-	{
+	{ 
 		id: {
 			type: String,
 			required: true,
@@ -32,5 +32,5 @@ const MenuSchema = new mongoose.Schema(
 
 MenuSchema.plugin(mongooseStringQuery);
 
-const Menu = mongoose.model('menu', MenuSchema);
+const Menu = mongoose.model('menus', MenuSchema);
 module.exports = Menu; 

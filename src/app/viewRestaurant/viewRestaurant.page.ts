@@ -1,3 +1,6 @@
+import { Review } from './../models/review';
+
+import { RestApiService } from './../rest-api.service';
 import { Restaurant } from './../models/restaurant';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -12,32 +15,52 @@ import { Menu } from '../models/menu';
 })
 export class ViewRestaurantPage implements OnInit {
 
-  id = null;
-  menus: Menu[];
-  restaurant: Restaurant = {
-    id: 'bread-bakery',
-    name: 'Bread & Bakery',
-    category: 'Bakery',
-    deliveryEstimate: '25m',
-    rating: 4.9,
-    imagePath: 'assets/img/restaurants/breadbakery.png',
-    about: 'A Bread & Brakery tem 40 anos de mercado. Fazemos os melhores doces e pães. Compre e confira.',
-    hours: 'Funciona de segunda à sexta, de 8h às 23h'
-  };
+  id: any;
+  restaurant: any;
+  menus: any;
+  reviews: any;
+  public refId: any;
 
    constructor(private activatedRoute: ActivatedRoute,
-               public modalView: ModalController) { }
+               public modalView: ModalController,
+               public restApiService: RestApiService) {
+
+               }
 
   ngOnInit() {
     this.id = this.activatedRoute.snapshot.paramMap.get('id');
-    // this.menus = null;
-   // this.restaurant
+    this.restaurant = this.getRestaurantShare(this.id);
   }
 
-  async viewReview(idRestaurant) {
+getRestaurantShare(id) {
+  this.restApiService.getRestaurant(id).subscribe((data: {}) => {
+    // console.log(data);
+    this.restaurant = data;
+    this.menus = this.getMenuRestaurantShare();
+    this.reviews = this.getReviewRestaurant();
+    // console.log(this.refId);
+  });
+}
+
+getMenuRestaurantShare() {
+  // console.log(this.restaurant.id);
+  this.restApiService.getMenuRestaurant(this.restaurant.id).subscribe((data: {}) => {
+    this.menus = data;
+    // console.log(this.menus);
+  });
+  }
+
+  getReviewRestaurant() {
+    this.restApiService.getReviewRestaurant(this.restaurant.id).subscribe((data: {}) => {
+      console.log(data);
+      this.reviews = data;
+    });
+  }
+  async viewReview() {
+    const aux: Review = this.reviews;
     const modal = await this.modalView.create({
       component: ReviewsPage,
-      componentProps: { idRestaurant }
+      componentProps: {aux}
     });
     return await modal.present();
   }

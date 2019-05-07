@@ -1,8 +1,9 @@
 import { RestApiService } from './../../rest-api.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { NavParams, ModalController, AlertController } from '@ionic/angular';
+import { NavParams, ModalController, AlertController, ToastController } from '@ionic/angular';
 import { Restaurant } from 'src/app/models/restaurant';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-updateRestaurant',
@@ -11,53 +12,45 @@ import { NgForm } from '@angular/forms';
 })
 export class UpdateRestaurantPage implements OnInit {
 
-  @Input() restaurant: Restaurant;
-  router: any;
+  @Input() restaurant: any;
 
-  constructor(navParams: NavParams, public modalController: ModalController,
-              public restApiService: RestApiService, public alertController: AlertController) { }
 
-  ngOnInit() {  }
+  constructor(public modalController: ModalController,
+              public restApiService: RestApiService,
+              public alertController: AlertController,
+              public toastController: ToastController,
+              private router: Router) { }
 
-  async updateRestaurant(form: NgForm) {
-    if (this.presentAlertConfirm()) {
-      await this.restApiService.updateRestaurant(this.restaurant.id, form)
-        .subscribe(res => {
-            const id = res['restaurant.id'];
-            this.router.navigate([ '/tabs', { outlets: { details: id }} ]);
+  ngOnInit() {
+    console.log(this.restaurant._id);
+   }
+
+  updateRestaurant(form: NgForm) {
+      this.restApiService.updateRestaurant(this.restaurant._id, form.value)
+        .subscribe((result) => {
+          this.presentToast('Success');
+          this.closeModal();
           }, (err) => {
             console.log(err);
+            this.closeModal();
+            this.router.navigate(['/']).then(nav => {
+              window.location.reload();
+            });
+            this.presentToast('Cancel');
           }
         );
-    } else {
-      this.router.navigate([ '/' ]);
-    }
    }
 
   async closeModal() {
     await this.modalController.dismiss();
+
   }
 
-  async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      header: 'Warning!',
-      message: 'Confimar as alterações?',
-      buttons: [
-        {
-          text: 'Okay',
-          handler: () => {
-            return true;
-          }
-        },
-        {
-          text: 'Cancel',
-          handler: () => {
-            return false;
-          }
-        }
-      ]
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
     });
-
-    await alert.present();
+    toast.present();
   }
 }
