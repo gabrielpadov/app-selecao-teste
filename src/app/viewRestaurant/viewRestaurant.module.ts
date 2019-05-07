@@ -1,3 +1,4 @@
+import { ReviewsPageModule } from './reviews/reviews.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,9 +14,10 @@ import { ReviewsPage } from './reviews/reviews.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewRestaurantPageRoutingModule
+    ViewRestaurantPageRoutingModule,
+    ReviewsPageModule
   ],
-  declarations: [ViewRestaurantPage, ReviewsPage],
-  entryComponents: [ReviewsPage]
+  declarations: [ViewRestaurantPage, ],
+  entryComponents: []
 })
 export class ViewRestaurantPageModule {}
