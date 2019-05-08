@@ -18,7 +18,6 @@ export class ViewRestaurantPage implements OnInit {
   id: any;
   restaurant: any;
   menus: any;
-  reviews: any;
 
    constructor(private activatedRoute: ActivatedRoute,
                public modalView: ModalController,
@@ -27,23 +26,18 @@ export class ViewRestaurantPage implements OnInit {
  ngOnInit() {
    this.id = this.activatedRoute.snapshot.paramMap.get('id');
    this.restApiService.getRestaurant(this.id).subscribe((data: {}) => {
-     this.restaurant = data;
-     this.restApiService.getMenuRestaurant(this.restaurant.id).subscribe((dataa: {}) => {
-       this.menus = dataa;
-     });
-     this.restApiService.getReviewRestaurant(this.restaurant.id).subscribe((dataaa: {}) => {
-       this.reviews = dataaa;
+    this.restaurant = data;
+    this.restApiService.getMenuRestaurant(this.restaurant.id).subscribe((dataa: {}) => {
+      this.menus = dataa;
       });
     });
   }
- /*
 
-   async viewReview(restaurant: Restaurant) {
-    // const aux: Review[ ] = this.reviews;
+   async viewReview(restaurantId) {
     const modal = await this.modalView.create({
       component: ReviewsPage,
-	componentProps: { restaurant }
+      componentProps: { restaurantId }
     });
     return await modal.present();
-  } */
+  }
 }

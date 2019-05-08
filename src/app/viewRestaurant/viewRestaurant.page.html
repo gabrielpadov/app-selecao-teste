@@ -24,9 +24,9 @@
         
         <h2>{{ restaurant?.hours }}</h2> 
         </ion-card-content>
-      <!--div padding>
-        <ion-button (click)="viewReview(restaurant)" fill="outline" slot="end">Reviews</ion-button>
-      </div -->
+      <div padding>
+        <ion-button (click)="viewReview(restaurant?.id)" fill="outline" slot="end">Reviews</ion-button>
+      </div>
     </ion-card>
 
       <div padding>
@@ -50,19 +50,6 @@
               </ion-item>
       
             </ion-list>
-
-      <ion-text color="dark"><h2> Reviews</h2></ion-text>
-			<ion-card  color="secondary" *ngFor="let review of reviews">
-      <ion-card-content>
-          <ion-icon slot="end" class="ios md hydrated" class="ios hydrated"
-          name="star" color="warning"></ion-icon>
-          <ion-text color="dark">{{ review?.rating }}</ion-text>
-          <ion-text color="dark"><h3>{{ review?.date }}</h3></ion-text>
-        <h2>{{ review?.name }}</h2>
-        <p>{{ review?.comments }}</p>
-      </ion-card-content>
-    </ion-card>
       </div>
-
 
 </ion-content>

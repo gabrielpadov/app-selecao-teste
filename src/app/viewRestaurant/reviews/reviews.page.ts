@@ -10,22 +10,16 @@ import { Review } from '../../models/review';
 })
 export class ReviewsPage implements OnInit {
 
-  @Input() reviews; // staurantId;
-  // reviews: any;
+  @Input() restaurantId;
+  reviews: any;
 
   constructor(navParams: NavParams, public modalController: ModalController,
               public restApiService: RestApiService) {  }
   ngOnInit() {
-   //  this.reviews = this.getMenuRestaurant();
-    console.log(this.reviews + 'aqui');
-   }
-
- /* getMenuRestaurant() {
-    this.restApiService.getReviewRestaurant(this.restaurantId.restaurantId).subscribe((data: {}) => {
-      console.log(data);
+    this.restApiService.getReviewRestaurant(this.restaurantId).subscribe((data: {}) => {
       this.reviews = data;
     });
-  } */
+  }
 
   async closeModal() {
     await this.modalController.dismiss();

@@ -16,10 +16,10 @@
       <ion-card-content>
           <ion-icon slot="end" class="ios md hydrated" class="ios hydrated"
           name="star" color="warning"></ion-icon>
-          <ion-text color="dark">{{ review.rating }}</ion-text>
-          <ion-text color="dark"><h3>{{ review.date }}</h3></ion-text>
-        <h2>{{ review.name }}</h2>
-        <p>{{ review.comments }}</p>
+          <ion-text color="dark">{{ review?.rating }}</ion-text>
+          <ion-text color="dark"><h3>{{ review?.date }}</h3></ion-text>
+        <h2>{{ review?.name }}</h2>
+        <p>{{ review?.comments }}</p>
       </ion-card-content>
     </ion-card>
   </div>
