@@ -9,7 +9,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "postinstall": "npm start",
+    "postinstall": "npm run build",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -41,6 +41,7 @@
     "@angular/compiler-cli": "~7.2.2",
     "@angular/language-service": "~7.2.2",
     "@ionic/angular-toolkit": "~1.5.1",
+    "@ionic/app-scripts": "^3.2.3",
     "@ionic/lab": "^1.0.24",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
