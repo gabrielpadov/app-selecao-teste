@@ -1,17 +1,17 @@
 teste
 # teste-selecao
 
+DEV
 Diretório '/api-teste' possui a API.
-    Comandos no diretório
-        npm install
-        npm run dev
 
+Comandos no diretório
+npm install
+npm run dev
 Diretório 'teste-selecao'
-    Comandos no diretório
-        npm install
-        ionic serve -l
-Para upload no servidor web, mudar o package.json
-Para compilar local package##.json
+
+Comandos no diretório
+npm install
+ionic serve -l
 
 Importar dados para o mongoDb
     Comandos
