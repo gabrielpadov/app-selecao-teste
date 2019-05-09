@@ -1,5 +1,7 @@
 {
   "name": "teste-selecao",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
